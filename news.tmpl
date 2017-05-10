@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function
+import pysolr
+import json
+# Setup a Solr instance. The timeout is optional.
+solr = pysolr.Solr('http://localhost:8983/solr/cora', timeout=10)
+
+data=[
+        {% for entry in feed %}
+        {
+            "url": "{{ entry.link }}",
+            "id": "{{ entry.id }}",
+            "published": "{{ entry.published }}",
+            "summary_detail": "{{ entry.summary_detail }}",
+            "title": "{{ entry.title }}"
+        },
+        {% endfor %}
+	]
+
+solr.add(data)
