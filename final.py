@@ -49,8 +49,7 @@ for line in tweets_file:
         tweet = json.loads(line.strip())
         if 'text' in tweet: # only messages contains 'text' field is a tweet
             temp = tweet['text']
-            #print (temp)
-            #hello= 'Thank u'
+
             temp = temp.decode('utf-8').encode('ascii','ignore')
             temp = re.sub(re.compile('<.*?>'), '', temp)                                                                                      #remove html tags
             temp = re.sub(r'(https|http)?:\/\/(\w|\.|\/|\?|\=|\&|\%)*\b', '', temp, flags=re.MULTILINE)                                       #remove url
@@ -58,12 +57,7 @@ for line in tweets_file:
             temp = multipleReplace(temp, wordDic)#remove slang words
             temp = re.sub('(?!^)([A-Z][a-z]+)', r' \1', temp)#split attached words
             temp = ' '.join([word for word in temp.split() if word not in (stopwords.words('english'))])# remove stopwords
-            #print (temp)
-            #obj= {u"id": tweet['id'], u"created_at": tweet['created_at'], u"text": tweet['text'], u"screen_name": tweet['user']['screen_name'], u"name": tweet['user']['name']}
-            #print json.dumps(obj, indent=4)
-            #print tweet['id'] # This is the tweet's id
-            #print tweet['created_at'] # when the tweet posted
-            #print html_parser.unescape(tweet['text'].decode("utf8")) # content of the tweet
+
             results = solr.search(temp, rows=1)
             for result in results:
                 print("News  '{0}'.".format(result['url']))
