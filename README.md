@@ -3,7 +3,7 @@ Steps to run the system : <br>
 1. Start solr (with the correct core name which has to be mentioned in news.tmpl and final.py files) <br>
 2. python extract_tweets.py <twitter_handle> (to extract tweets from the twitter handle) <br>
 3. python rss2json.py (by changing rss link to extract news which will be saved according to the template file news.tmpl) <br>
-4. pyhton final.py (which has tweet cleaning code, solr update code as well as solr search code) <br>
+4. python final.py (which has tweet cleaning code, solr update code as well as solr search code) <br>
 <br>
 Steps to start solr : <br>
 1. cd /opt <br>
